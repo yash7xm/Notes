@@ -60,3 +60,17 @@ and to resolve that so choose wisely considering long-term plans.
 There is also TPC-C Benchmark which is online which we can use it. 
 The main performance indicator is throughput: the number of transactions the
 database system is able to process per minute.
+
+
+Understanding Trade-Offs
+
+Everything is just trade-off in computer science here it can be low read more writes or 
+something like this.
+To draw a parallel with city planning, it is
+possible to build a city for a specific population and choose to build up or
+build out. In both cases, the same number of people will fit into the city,
+but these approaches lead to radically different lifestyles. When building
+the city up, people live in apartments and population density is likely to
+lead to more traffic in a smaller area; in a more spread-out city, people are
+more likely to live in houses, but commuting will require covering larger
+distances.
