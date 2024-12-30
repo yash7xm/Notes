@@ -1,0 +1,62 @@
+The primary job of any database management system is reliably storing
+data and making it available for users.
+
+Since we can't be just creating a seprate database for our application
+we will just use these Infrastructures and focus on our application logic.
+
+Databases are modular systems and consist of multiple parts: 
+-> a transport layer accepting requests, 
+-> a query processor determining the most efficient way to run queries, 
+-> an execution engine carrying out the operations, 
+-> and a storage engine
+
+The storage engine (or database engine) is a software component of a
+database management system responsible for storing, retrieving, and
+managing data in memory and on disk, designed to capture a persistent,
+long-term memory of each node.
+
+While databases can respond to complex queries storage engines look at
+the data more granually and offer a simple data manipulation API, to create
+update or retrieve records.
+
+One way to look at this is that database
+management systems are applications built on top of storage engines,
+offering a schema, a query language, indexing, transactions, and many
+other useful features.
+
+Many storage engines are initially just build independent are now been
+embedded in dbms.
+
+Using pluggable storage engines has enabled database developers to 
+bootstrap database systems using existing storage engines, and 
+concentrate on the other subsystems.
+
+At the same time, clear separation between database system components
+opens up an opportunity to switch between different engines, potentially
+better suited for particular use cases. 
+For example, MySQL, a popular database management system, 
+has several storage engines, including
+InnoDB, MyISAM, and RocksDB (in the MyRocks distribution).
+MongoDB allows switching between WiredTiger, In-Memory, and the
+(now-deprecated) MMAPv1 storage engines.
+
+
+Comparing Databases
+
+We have to be carefull while selecting our database obviously...
+Choosing a database based on their components such as which storage engine they
+are using and how data is shared, replicated or distributed. Thier arbitrary rank
+(popularity) etc. or implementation language can lead to invalid and premature conclusions.
+These methods can only be used for high-level comparasion
+
+So when choosing do proper testing and ask questions which are relevant for your use case
+try to test the database with real life look alike situations such as stree testing and 
+then comparing them a lot of databases gives us that such that we can test them before hand
+
+Also try to understand some parts of the database prior to the use such as its (codebase)
+Because jitna time phele lga denge usse smjne m utna kam time lgega bad me agr koi dikat ate h 
+and to resolve that so choose wisely considering long-term plans.
+
+There is also TPC-C Benchmark which is online which we can use it. 
+The main performance indicator is throughput: the number of transactions the
+database system is able to process per minute.
