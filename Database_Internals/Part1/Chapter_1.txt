@@ -1,0 +1,88 @@
+## Introduction and Overview
+
+Some sources group DBMSs into three major categories:
+
+-> Online transaction processing (OLTP) databases: 
+    These handle a large number of user-facing requests and transactions.
+    Queries are often predefined and short-lived.
+
+-> Online analytical processing (OLAP) databases:
+    These handle complex aggregations. OLAP databases are often used
+    for analytics and data warehousing, and are capable of handling
+    complex, long-running ad hoc queries.
+
+-> Hybrid transactional and analytical processing (HTAP):
+    These databases combine properties of both OLTP and OLAP stores.
+
+
+# DBMS Architecture
+
+Mainly sbka same same sa he hota bs kuch differences hote h which are not that much
+
+DBMS ek cliet/server model ke trh kam krta h -> DBMS(node) is server and 
+application instances is client
+
+Client req arrive through transport subsystem. Req comes in the form of queries(query lang).
+Transport subsystem is also responsible for communicating with other nodes in the cluster.
+
+Transport 
+    Cluster Communication       Client Communication
+
+Query Processor
+    Query Parser
+    Query Optimizer
+
+Execution Engine 
+    Remote Execution        Local Execution
+
+Storage Engine
+    Transaction Manager     Lock Manager
+    Access Methods
+    Buffer Manager      Recovery Manager
+
+Upon receipt, the transport subsystem hands the query over to a query
+processor, which parses, interprets, and validates it. Later, access control
+checks are performed, as they can be done fully only after the query is
+interpreted.
+
+The parsed query is passed to the query optimizer, which first eliminates
+impossible and redundant parts of the query, and then attempts to find the
+most efficient way to execute it based on internal statistics (index
+cardinality, approximate intersection size, etc.) and data placement (which
+nodes in the cluster hold the data and the costs associated with its transfer).
+
+The query is usually presented in the form of an execution plan (or query
+plan): a sequence of operations that have to be carried out for its results to
+be considered complete.
+
+The execution plan is handled by the execution engine, which collects the
+results of the execution of local and remote operations. Remote execution
+can involve writing and reading data to and from other nodes in the cluster,
+and replication.
+Local queries (coming directly from clients or from other nodes) are
+executed by the storage engine. The storage engine has several
+components with dedicated responsibilities:
+
+-> Transaction manager
+    This manager schedules transactions and ensures they cannot leave
+    the database in a logically inconsistent state.
+
+-> Lock manager
+    This manager locks on the database objects for the running
+    transactions, ensuring that concurrent operations do not violate
+    physical data integrity.
+
+-> Access methods (storage structures)
+    These manage access and organizing data on disk. Access methods
+    include heap files and storage structures such as B-Trees
+    or LSM Trees.
+
+-> Buffer manager
+    This manager caches data pages in memory.
+
+-> Recovery manager
+    This manager maintains the operation log and restoring the system
+    state in case of a failure.
+
+Together, transaction and lock managers are responsible for concurrency
+control.
